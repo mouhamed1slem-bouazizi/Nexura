@@ -2,6 +2,7 @@
 const nextConfig = {
   images: {
     domains: [
+      'firebasestorage.googleapis.com',
       'pbs.twimg.com',     // Twitter profile images
       'media.licdn.com',   // LinkedIn profile images
       'scontent.cdninstagram.com', // Instagram content

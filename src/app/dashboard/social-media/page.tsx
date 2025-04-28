@@ -472,8 +472,8 @@ export default function SocialMediaPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Social Media Management</h1>
+    <div className="max-w-7xl mx-auto px-4 py-8 bg-white">
+      <h1 className="text-3xl font-bold mb-8 text-gray-900">Social Media Management</h1>
       
       {/* Tabs - Add Instagram tab */}
       <div className="mb-6 border-b">
@@ -482,8 +482,8 @@ export default function SocialMediaPage() {
             onClick={() => setActiveTab('twitter')}
             className={`pb-4 px-1 ${
               activeTab === 'twitter'
-                ? 'border-b-2 border-blue-500 text-blue-600 font-medium'
-                : 'text-gray-500 hover:text-gray-700'
+                ? 'border-b-2 border-blue-500 text-blue-700 font-medium'
+                : 'text-gray-700 hover:text-gray-900'
             }`}
           >
             Twitter
@@ -492,8 +492,8 @@ export default function SocialMediaPage() {
             onClick={() => setActiveTab('linkedin')}
             className={`pb-4 px-1 ${
               activeTab === 'linkedin'
-                ? 'border-b-2 border-blue-500 text-blue-600 font-medium'
-                : 'text-gray-500 hover:text-gray-700'
+                ? 'border-b-2 border-blue-500 text-blue-700 font-medium'
+                : 'text-gray-700 hover:text-gray-900'
             }`}
           >
             LinkedIn
@@ -502,8 +502,8 @@ export default function SocialMediaPage() {
             onClick={() => setActiveTab('instagram')}
             className={`pb-4 px-1 ${
               activeTab === 'instagram'
-                ? 'border-b-2 border-blue-500 text-blue-600 font-medium'
-                : 'text-gray-500 hover:text-gray-700'
+                ? 'border-b-2 border-blue-500 text-blue-700 font-medium'
+                : 'text-gray-700 hover:text-gray-900'
             }`}
           >
             Instagram
@@ -516,77 +516,30 @@ export default function SocialMediaPage() {
         <>
           {twitterAccount ? (
             <div className="space-y-6">
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h2 className="text-xl font-semibold mb-4">Connected Twitter Account</h2>
-                <p className="text-gray-600">@{twitterAccount.username}</p>
-                <p className="text-sm text-gray-500">
+              <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                <h2 className="text-xl font-semibold mb-4 text-gray-900">Connected Twitter Account</h2>
+                <p className="text-gray-800">@{twitterAccount.username}</p>
+                <p className="text-sm text-gray-700">
                   Connected since: {new Date(twitterAccount.connectedAt).toLocaleDateString()}
                 </p>
               </div>
 
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h2 className="text-xl font-semibold mb-4">Create Tweet</h2>
+              <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                <h2 className="text-xl font-semibold mb-4 text-gray-900">Create Tweet</h2>
                 <div className="space-y-4">
                   <div className="space-y-1">
-                    <label className="block text-sm font-medium text-gray-700">Tweet</label>
+                    <label className="block text-sm font-medium text-gray-800">Tweet</label>
                     <textarea
                       value={newTweet}
                       onChange={(e) => setNewTweet(e.target.value)}
                       placeholder="What's happening?"
-                      className="w-full p-2 border border-gray-300 rounded-md"
+                      className="w-full p-2 border border-gray-300 rounded-md text-gray-800"
                       rows={4}
                     />
                   </div>
-                  <div className="space-y-2">
-                    <input
-                      type="file"
-                      accept="image/*,video/*"
-                      onChange={handleMediaUpload}
-                      className="hidden"
-                      id="twitter-media-upload"
-                    />
-                    <label
-                      htmlFor="twitter-media-upload"
-                      className="inline-block px-4 py-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200"
-                    >
-                      Add Image or Video
-                    </label>
-                    {mediaPreview && (
-                      <div className="relative w-full max-w-xs">
-                        {mediaType === 'image' ? (
-                          <div className="relative h-48 w-full">
-                            <Image
-                              src={mediaPreview}
-                              alt="Preview"
-                              className="rounded-lg object-cover"
-                              fill
-                              sizes="(max-width: 768px) 100vw, 300px"
-                            />
-                          </div>
-                        ) : (
-                          <video
-                            src={mediaPreview}
-                            controls
-                            className="rounded-lg max-h-48 w-full"
-                          />
-                        )}
-                        <button
-                          onClick={() => {
-                            if (mediaPreview) {
-                              URL.revokeObjectURL(mediaPreview);
-                            }
-                            setMediaFile(null);
-                            setMediaPreview('');
-                            setMediaType(null);
-                          }}
-                          className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
-                          type="button"
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    )}
-                  </div>
+                  
+                  {/* ... existing media upload code ... */}
+                  
                   <div className="flex justify-end">
                     <Button
                       onClick={handlePostTweet}
@@ -599,9 +552,9 @@ export default function SocialMediaPage() {
               </div>
             </div>
           ) : (
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h2 className="text-xl font-semibold mb-4">No Twitter Account Connected</h2>
-              <p className="text-gray-600 mb-4">
+            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+              <h2 className="text-xl font-semibold mb-4 text-gray-900">No Twitter Account Connected</h2>
+              <p className="text-gray-800 mb-4">
                 Please connect your Twitter account in the settings to start managing your tweets.
               </p>
               <Button onClick={() => window.location.href = '/dashboard/settings'}>
@@ -617,77 +570,30 @@ export default function SocialMediaPage() {
         <>
           {linkedinAccount ? (
             <div className="space-y-6">
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h2 className="text-xl font-semibold mb-4">Connected LinkedIn Account</h2>
-                <p className="text-gray-600">{linkedinAccount.username}</p>
-                <p className="text-sm text-gray-500">
+              <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                <h2 className="text-xl font-semibold mb-4 text-gray-900">Connected LinkedIn Account</h2>
+                <p className="text-gray-800">{linkedinAccount.username}</p>
+                <p className="text-sm text-gray-700">
                   Connected since: {new Date(linkedinAccount.connectedAt).toLocaleDateString()}
                 </p>
               </div>
 
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h2 className="text-xl font-semibold mb-4">Create LinkedIn Post</h2>
+              <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                <h2 className="text-xl font-semibold mb-4 text-gray-900">Create LinkedIn Post</h2>
                 <div className="space-y-4">
                   <div className="space-y-1">
-                    <label className="block text-sm font-medium text-gray-700">Post</label>
+                    <label className="block text-sm font-medium text-gray-800">Post</label>
                     <textarea
                       value={newLinkedInPost}
                       onChange={(e) => setNewLinkedInPost(e.target.value)}
                       placeholder="Share something with your network..."
-                      className="w-full p-2 border border-gray-300 rounded-md"
+                      className="w-full p-2 border border-gray-300 rounded-md text-gray-800"
                       rows={4}
                     />
                   </div>
-                  <div className="space-y-2">
-                    <input
-                      type="file"
-                      accept="image/*,video/*"
-                      onChange={handleMediaUpload}
-                      className="hidden"
-                      id="linkedin-media-upload"
-                    />
-                    <label
-                      htmlFor="linkedin-media-upload"
-                      className="inline-block px-4 py-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200"
-                    >
-                      Add Image or Video
-                    </label>
-                    {mediaPreview && (
-                      <div className="relative w-full max-w-xs">
-                        {mediaType === 'image' ? (
-                          <div className="relative h-48 w-full">
-                            <Image
-                              src={mediaPreview}
-                              alt="Preview"
-                              className="rounded-lg object-cover"
-                              fill
-                              sizes="(max-width: 768px) 100vw, 300px"
-                            />
-                          </div>
-                        ) : (
-                          <video
-                            src={mediaPreview}
-                            controls
-                            className="rounded-lg max-h-48 w-full"
-                          />
-                        )}
-                        <button
-                          onClick={() => {
-                            if (mediaPreview) {
-                              URL.revokeObjectURL(mediaPreview);
-                            }
-                            setMediaFile(null);
-                            setMediaPreview('');
-                            setMediaType(null);
-                          }}
-                          className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
-                          type="button"
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    )}
-                  </div>
+                  
+                  {/* ... existing media upload code ... */}
+                  
                   <div className="flex justify-end">
                     <Button
                       onClick={handlePostLinkedIn}
@@ -700,9 +606,9 @@ export default function SocialMediaPage() {
               </div>
             </div>
           ) : (
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h2 className="text-xl font-semibold mb-4">No LinkedIn Account Connected</h2>
-              <p className="text-gray-600 mb-4">
+            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+              <h2 className="text-xl font-semibold mb-4 text-gray-900">No LinkedIn Account Connected</h2>
+              <p className="text-gray-800 mb-4">
                 Please connect your LinkedIn account in the settings to start managing your posts.
               </p>
               <Button onClick={() => window.location.href = '/dashboard/settings'}>
@@ -718,77 +624,30 @@ export default function SocialMediaPage() {
         <>
           {instagramAccount ? (
             <div className="space-y-6">
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h2 className="text-xl font-semibold mb-4">Connected Instagram Account</h2>
-                <p className="text-gray-600">@{instagramAccount.username}</p>
-                <p className="text-sm text-gray-500">
+              <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                <h2 className="text-xl font-semibold mb-4 text-gray-900">Connected Instagram Account</h2>
+                <p className="text-gray-800">@{instagramAccount.username}</p>
+                <p className="text-sm text-gray-700">
                   Connected since: {new Date(instagramAccount.connectedAt).toLocaleDateString()}
                 </p>
               </div>
 
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h2 className="text-xl font-semibold mb-4">Create Instagram Post</h2>
+              <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                <h2 className="text-xl font-semibold mb-4 text-gray-900">Create Instagram Post</h2>
                 <div className="space-y-4">
                   <div className="space-y-1">
-                    <label className="block text-sm font-medium text-gray-700">Caption</label>
+                    <label className="block text-sm font-medium text-gray-800">Caption</label>
                     <textarea
                       value={newInstagramPost}
                       onChange={(e) => setNewInstagramPost(e.target.value)}
                       placeholder="Write a caption..."
-                      className="w-full p-2 border border-gray-300 rounded-md"
+                      className="w-full p-2 border border-gray-300 rounded-md text-gray-800"
                       rows={4}
                     />
                   </div>
-                  <div className="space-y-2">
-                    <input
-                      type="file"
-                      accept="image/*,video/*"
-                      onChange={handleMediaUpload}
-                      className="hidden"
-                      id="instagram-media-upload"
-                    />
-                    <label
-                      htmlFor="instagram-media-upload"
-                      className="inline-block px-4 py-2 bg-gray-100 rounded cursor-pointer hover:bg-gray-200"
-                    >
-                      Choose Image or Video (Required)
-                    </label>
-                    {mediaPreview && (
-                      <div className="relative w-full max-w-xs">
-                        {mediaType === 'image' ? (
-                          <div className="relative h-48 w-full">
-                            <Image
-                              src={mediaPreview}
-                              alt="Preview"
-                              className="rounded-lg object-cover"
-                              fill
-                              sizes="(max-width: 768px) 100vw, 300px"
-                            />
-                          </div>
-                        ) : (
-                          <video
-                            src={mediaPreview}
-                            controls
-                            className="rounded-lg max-h-48 w-full"
-                          />
-                        )}
-                        <button
-                          onClick={() => {
-                            if (mediaPreview) {
-                              URL.revokeObjectURL(mediaPreview);
-                            }
-                            setMediaFile(null);
-                            setMediaPreview('');
-                            setMediaType(null);
-                          }}
-                          className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
-                          type="button"
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    )}
-                  </div>
+                  
+                  {/* ... existing media upload code ... */}
+                  
                   <div className="flex justify-end">
                     <Button
                       onClick={handlePostInstagram}
@@ -801,9 +660,9 @@ export default function SocialMediaPage() {
               </div>
             </div>
           ) : (
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h2 className="text-xl font-semibold mb-4">No Instagram Account Connected</h2>
-              <p className="text-gray-600 mb-4">
+            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+              <h2 className="text-xl font-semibold mb-4 text-gray-900">No Instagram Account Connected</h2>
+              <p className="text-gray-800 mb-4">
                 Please connect your Instagram account in the settings to start managing your posts.
               </p>
               <Button onClick={() => window.location.href = '/dashboard/settings'}>

@@ -19,7 +19,7 @@ export function Sidebar({ children }: { children: React.ReactNode }) {
     { name: 'Profile', icon: UserIcon, path: '/dashboard/profile' },
     { name: 'Messages', icon: ChatBubbleLeftIcon, path: '/dashboard/messages' },
     { name: 'Friends', icon: UsersIcon, path: '/dashboard/friends' },
-    { name: 'Social Media', icon: HomeIcon, path: '/dashboard/social-media' }, // Add this line
+    { name: 'Social Media', icon: HomeIcon, path: '/dashboard/social-media' },
     { name: 'Settings', icon: CogIcon, path: '/dashboard/settings' },
   ];
 
@@ -38,9 +38,9 @@ export function Sidebar({ children }: { children: React.ReactNode }) {
           className="absolute -right-3 top-10 bg-white border rounded-full p-1 shadow-md"
         >
           {isExpanded ? (
-            <ChevronLeftIcon className="w-4 h-4" />
+            <ChevronLeftIcon className="w-4 h-4 text-gray-700" />
           ) : (
-            <ChevronRightIcon className="w-4 h-4" />
+            <ChevronRightIcon className="w-4 h-4 text-gray-700" />
           )}
         </button>
 
@@ -48,9 +48,9 @@ export function Sidebar({ children }: { children: React.ReactNode }) {
           <div className="mb-8">
             <Link href="/">
               {isExpanded ? (
-                <h1 className="text-xl font-bold">Social Media</h1>
+                <h1 className="text-xl font-bold text-gray-900">Social Media</h1>
               ) : (
-                <h1 className="text-xl font-bold text-center">SM</h1>
+                <h1 className="text-xl font-bold text-center text-gray-900">SM</h1>
               )}
             </Link>
           </div>
@@ -66,12 +66,12 @@ export function Sidebar({ children }: { children: React.ReactNode }) {
                   href={item.path}
                   className={`flex items-center space-x-2 p-3 rounded-lg transition-colors
                     ${isActive 
-                      ? 'bg-blue-50 text-blue-600' 
-                      : 'hover:bg-gray-100'
+                      ? 'bg-blue-100 text-blue-700 font-medium' 
+                      : 'text-gray-800 hover:bg-gray-100'
                     }`}
                 >
-                  <Icon className="w-6 h-6" />
-                  {isExpanded && <span>{item.name}</span>}
+                  <Icon className={`w-6 h-6 ${isActive ? 'text-blue-700' : 'text-gray-700'}`} />
+                  {isExpanded && <span className="font-medium">{item.name}</span>}
                 </Link>
               );
             })}

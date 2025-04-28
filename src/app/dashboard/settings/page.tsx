@@ -447,8 +447,8 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Settings</h1>
+    <div className="max-w-7xl mx-auto px-4 py-8 bg-white">
+      <h1 className="text-3xl font-bold mb-8 text-gray-900">Settings</h1>
       
       {error && (
         <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-md">
@@ -456,8 +456,8 @@ export default function SettingsPage() {
         </div>
       )}
       
-      <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold mb-6">Twitter Integration</h2>
+      <div className="bg-white p-6 rounded-lg shadow-md mb-6 border border-gray-200">
+        <h2 className="text-xl font-semibold mb-6 text-gray-900">Twitter Integration</h2>
         {isTwitterConnected ? (
           <div className="space-y-4">
             <div className="flex items-center space-x-4">
@@ -473,8 +473,8 @@ export default function SettingsPage() {
                 </div>
               )}
               <div>
-                <p className="font-medium">@{twitterAccount.username}</p>
-                <p className="text-sm text-green-600">Connected</p>
+                <p className="font-medium text-gray-800">@{twitterAccount.username}</p>
+                <p className="text-sm text-green-700">Connected</p>
               </div>
             </div>
             <Button
@@ -499,8 +499,8 @@ export default function SettingsPage() {
         )}
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold mb-6">LinkedIn Integration</h2>
+      <div className="bg-white p-6 rounded-lg shadow-md mb-6 border border-gray-200">
+        <h2 className="text-xl font-semibold mb-6 text-gray-900">LinkedIn Integration</h2>
         
         {isLoading ? (
           <div className="flex justify-center py-4">
@@ -521,12 +521,12 @@ export default function SettingsPage() {
                 </div>
               ) : (
                 <div className="w-12 h-12 bg-blue-100 flex items-center justify-center rounded-full">
-                  <span className="text-blue-600 font-bold">in</span>
+                  <span className="text-blue-700 font-bold">in</span>
                 </div>
               )}
               <div>
-                <p className="font-medium">{userData.linkedinAccount.username}</p>
-                <p className="text-sm text-green-600">Connected</p>
+                <p className="font-medium text-gray-800">{userData.linkedinAccount.username}</p>
+                <p className="text-sm text-green-700">Connected</p>
               </div>
             </div>
             <Button
@@ -551,8 +551,8 @@ export default function SettingsPage() {
         )}
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold mb-6">Instagram Integration</h2>
+      <div className="bg-white p-6 rounded-lg shadow-md mb-6 border border-gray-200">
+        <h2 className="text-xl font-semibold mb-6 text-gray-900">Instagram Integration</h2>
         
         {isLoading ? (
           <div className="flex justify-center py-4">
@@ -577,8 +577,8 @@ export default function SettingsPage() {
                 </div>
               )}
               <div>
-                <p className="font-medium">@{userData?.instagramAccount?.username}</p>
-                <p className="text-sm text-green-600">Connected</p>
+                <p className="font-medium text-gray-800">@{userData?.instagramAccount?.username}</p>
+                <p className="text-sm text-green-700">Connected</p>
               </div>
             </div>
             <Button
@@ -603,8 +603,8 @@ export default function SettingsPage() {
         )}
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-6">Account Settings</h2>
+      <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+        <h2 className="text-xl font-semibold mb-6 text-gray-900">Account Settings</h2>
         <div className="space-y-4">
           <div className="pt-6 border-t">
             <Button
