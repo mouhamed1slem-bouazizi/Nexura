@@ -538,7 +538,53 @@ export default function SocialMediaPage() {
                     />
                   </div>
                   
-                  {/* ... existing media upload code ... */}
+                  {/* Media upload section */}
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-gray-800">Add media</label>
+                    <input
+                      type="file"
+                      accept="image/*,video/*"
+                      onChange={handleMediaUpload}
+                      className="block w-full text-sm text-gray-800
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-md file:border-0
+                        file:text-sm file:font-medium
+                        file:bg-blue-50 file:text-blue-700
+                        hover:file:bg-blue-100"
+                    />
+                    {mediaPreview && (
+                      <div className="mt-2 relative">
+                        {mediaType === 'image' ? (
+                          <Image 
+                            src={mediaPreview} 
+                            alt="Media preview" 
+                            width={200} 
+                            height={200} 
+                            className="rounded-md object-cover"
+                          />
+                        ) : (
+                          <video 
+                            src={mediaPreview} 
+                            controls 
+                            className="rounded-md" 
+                            style={{ maxWidth: '200px' }}
+                          />
+                        )}
+                        <button
+                          onClick={() => {
+                            URL.revokeObjectURL(mediaPreview);
+                            setMediaPreview('');
+                            setMediaFile(null);
+                            setMediaType(null);
+                          }}
+                          className="absolute top-1 right-1 bg-gray-800 bg-opacity-70 text-white rounded-full p-1"
+                          title="Remove media"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    )}
+                  </div>
                   
                   <div className="flex justify-end">
                     <Button
@@ -592,7 +638,53 @@ export default function SocialMediaPage() {
                     />
                   </div>
                   
-                  {/* ... existing media upload code ... */}
+                  {/* Media upload section */}
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-gray-800">Add media</label>
+                    <input
+                      type="file"
+                      accept="image/*,video/*"
+                      onChange={handleMediaUpload}
+                      className="block w-full text-sm text-gray-800
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-md file:border-0
+                        file:text-sm file:font-medium
+                        file:bg-blue-50 file:text-blue-700
+                        hover:file:bg-blue-100"
+                    />
+                    {mediaPreview && (
+                      <div className="mt-2 relative">
+                        {mediaType === 'image' ? (
+                          <Image 
+                            src={mediaPreview} 
+                            alt="Media preview" 
+                            width={200} 
+                            height={200} 
+                            className="rounded-md object-cover"
+                          />
+                        ) : (
+                          <video 
+                            src={mediaPreview} 
+                            controls 
+                            className="rounded-md" 
+                            style={{ maxWidth: '200px' }}
+                          />
+                        )}
+                        <button
+                          onClick={() => {
+                            URL.revokeObjectURL(mediaPreview);
+                            setMediaPreview('');
+                            setMediaFile(null);
+                            setMediaType(null);
+                          }}
+                          className="absolute top-1 right-1 bg-gray-800 bg-opacity-70 text-white rounded-full p-1"
+                          title="Remove media"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    )}
+                  </div>
                   
                   <div className="flex justify-end">
                     <Button
@@ -646,7 +738,53 @@ export default function SocialMediaPage() {
                     />
                   </div>
                   
-                  {/* ... existing media upload code ... */}
+                  {/* Media upload section - required for Instagram */}
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-gray-800">Add media (required)</label>
+                    <input
+                      type="file"
+                      accept="image/*,video/*"
+                      onChange={handleMediaUpload}
+                      className="block w-full text-sm text-gray-800
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-md file:border-0
+                        file:text-sm file:font-medium
+                        file:bg-blue-50 file:text-blue-700
+                        hover:file:bg-blue-100"
+                    />
+                    {mediaPreview && (
+                      <div className="mt-2 relative">
+                        {mediaType === 'image' ? (
+                          <Image 
+                            src={mediaPreview} 
+                            alt="Media preview" 
+                            width={200} 
+                            height={200} 
+                            className="rounded-md object-cover"
+                          />
+                        ) : (
+                          <video 
+                            src={mediaPreview} 
+                            controls 
+                            className="rounded-md" 
+                            style={{ maxWidth: '200px' }}
+                          />
+                        )}
+                        <button
+                          onClick={() => {
+                            URL.revokeObjectURL(mediaPreview);
+                            setMediaPreview('');
+                            setMediaFile(null);
+                            setMediaType(null);
+                          }}
+                          className="absolute top-1 right-1 bg-gray-800 bg-opacity-70 text-white rounded-full p-1"
+                          title="Remove media"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    )}
+                  </div>
                   
                   <div className="flex justify-end">
                     <Button
