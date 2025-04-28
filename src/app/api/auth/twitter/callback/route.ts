@@ -1,21 +1,25 @@
 import { NextResponse } from 'next/server';
 import admin from 'firebase-admin';
+import { getFirestore } from 'firebase-admin/firestore';
 
 // Initialize Firebase Admin if not already initialized
-if (!admin.apps.length) {
-  // Add debug logging to check environment variables
-  console.log('Firebase initialization - Environment variables check:', {
-    hasProjectId: !!process.env.FIREBASE_PROJECT_ID,
-    hasClientEmail: !!process.env.FIREBASE_CLIENT_EMAIL,
-    hasPrivateKey: !!process.env.FIREBASE_PRIVATE_KEY,
-  });
+let adminDb: FirebaseFirestore.Firestore;
 
-  try {
+try {
+  if (!admin.apps.length) {
+    // Add debug logging to check environment variables
+    console.log('Firebase initialization - Environment variables check:', {
+      hasProjectId: !!process.env.FIREBASE_PROJECT_ID,
+      hasClientEmail: !!process.env.FIREBASE_CLIENT_EMAIL,
+      hasPrivateKey: !!process.env.FIREBASE_PRIVATE_KEY,
+    });
+
     // Make sure all required properties are present before initializing
     if (!process.env.FIREBASE_PROJECT_ID || !process.env.FIREBASE_CLIENT_EMAIL || !process.env.FIREBASE_PRIVATE_KEY) {
       throw new Error('Missing required Firebase credentials in environment variables');
     }
 
+    // Initialize with proper error handling
     admin.initializeApp({
       credential: admin.credential.cert({
         projectId: process.env.FIREBASE_PROJECT_ID,
@@ -24,25 +28,30 @@ if (!admin.apps.length) {
       })
     });
     console.log('Firebase Admin initialized successfully');
-  } catch (error) {
-    console.error('Firebase Admin initialization error:', error);
-    // Continue execution - we'll handle the error in the route handler
   }
+  adminDb = getFirestore();
+} catch (error) {
+  console.error('Firebase Admin initialization error:', error);
+  // We'll handle this error in the route handler
 }
-
-const adminDb = admin.firestore();
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const code = searchParams.get('code');
   const state = searchParams.get('state');
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
 
   console.log('Callback initiated:', { code: !!code, state: !!state });
 
   if (!code || !state) {
     console.error('Missing parameters:', { code: !!code, state: !!state });
     return NextResponse.redirect(`${baseUrl}/dashboard/settings?error=missing_params`);
+  }
+
+  // Check if Firebase is properly initialized
+  if (!admin.apps.length || !adminDb) {
+    console.error('Firebase Admin is not initialized. Cannot proceed with user data storage.');
+    return NextResponse.redirect(`${baseUrl}/dashboard/settings?error=firebase_not_initialized`);
   }
 
   try {
