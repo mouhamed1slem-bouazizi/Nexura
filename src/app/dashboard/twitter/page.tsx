@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { Input } from '@/components/ui/core/Input';
+// Remove unused Input import
 import { Button } from '@/components/ui/core/Button';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
@@ -22,16 +22,11 @@ export default function TwitterPage() {
   const [newTweet, setNewTweet] = useState('');
   const [posting, setPosting] = useState(false);
 
-  useEffect(() => {
-    if (user) {
-      checkFirestoreData(); // Add this line
-      fetchTwitterAccount();
-    }
-  }, [user]);
-
-  const checkFirestoreData = async () => {
+  const checkFirestoreData = useCallback(async () => {
+    if (!user) return;
+    
     try {
-      const userDoc = await getDoc(doc(db, 'users', user!.uid));
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
       const data = userDoc.data();
       console.log('Full Firestore data:', data);
       console.log('Twitter account data structure:', {
@@ -42,11 +37,13 @@ export default function TwitterPage() {
     } catch (error) {
       console.error('Error checking Firestore data:', error);
     }
-  };
+  }, [user]);
 
-  const fetchTwitterAccount = async () => {
+  const fetchTwitterAccount = useCallback(async () => {
+    if (!user) return;
+    
     try {
-      const userDoc = await getDoc(doc(db, 'users', user!.uid));
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
       const data = userDoc.data();
       
       if (data?.twitterAccount?.accessToken) {
@@ -71,7 +68,14 @@ export default function TwitterPage() {
       setTwitterAccount(null);
     }
     setLoading(false);
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      checkFirestoreData();
+      fetchTwitterAccount();
+    }
+  }, [user, checkFirestoreData, fetchTwitterAccount]);
 
   const postTweet = async (text: string) => {
     if (!user) throw new Error('User not authenticated');
@@ -102,7 +106,7 @@ export default function TwitterPage() {
       }
       
       return responseData;
-    } catch (error: any) {
+    } catch (error: unknown) { // Replace any with unknown
       console.error('Error posting tweet:', error);
       throw error;
     }
@@ -133,9 +137,9 @@ export default function TwitterPage() {
       
       setNewTweet('');
       alert('Tweet posted successfully!');
-    } catch (error: any) {
+    } catch (error: unknown) { // Replace any with unknown
       console.error('Error posting tweet:', error);
-      alert(error.message || 'Failed to post tweet. Please try again.');
+      alert(error instanceof Error ? error.message : 'Failed to post tweet. Please try again.');
     }
     setPosting(false);
   };

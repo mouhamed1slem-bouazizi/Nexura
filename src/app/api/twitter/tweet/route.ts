@@ -289,8 +289,16 @@ export async function POST(req: Request) {
     // Switch to v2 API for tweet creation
     const tweetUrl = 'https://api.twitter.com/2/tweets';
     
-    // Prepare tweet payload
-    const tweetPayload: any = { text };
+    // Define a proper interface for the tweet payload
+    interface TweetPayload {
+      text: string;
+      media?: {
+        media_ids: string[];
+      };
+    }
+    
+    // Prepare tweet payload with the proper type
+    const tweetPayload: TweetPayload = { text };
     
     // Add media if we have it
     if (mediaId) {

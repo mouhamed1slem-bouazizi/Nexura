@@ -46,7 +46,7 @@ export default function SettingsPage() {
   const router = useRouter();
   
   // State variables
-  const [loading, setLoading] = useState(false);
+  // Removing the unused 'loading' state
   const [isLoading, setIsLoading] = useState(false);
   const [twitterLoading, setTwitterLoading] = useState(false);
   const [linkedinLoading, setLinkedinLoading] = useState(false);
@@ -190,7 +190,6 @@ export default function SettingsPage() {
     const checkLinkedInConnection = async () => {
       if (window.location.search.includes('code') && window.location.search.includes('state')) {
         try {
-          setLoading(true);
           setError('');
           
           // Extract the code and state from the URL
@@ -225,8 +224,6 @@ export default function SettingsPage() {
           } else {
             setError('Failed to connect LinkedIn account');
           }
-        } finally {
-          setLoading(false);
         }
       }
     };
