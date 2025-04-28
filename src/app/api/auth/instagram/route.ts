@@ -1,7 +1,8 @@
 // First, check if you have this file. If not, you'll need to create it with proper Instagram OAuth handling
 
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/firebase';
+// Removing the unused import
+// import { db } from '@/lib/firebase';
 
 export async function POST(request: NextRequest) {
   try {
