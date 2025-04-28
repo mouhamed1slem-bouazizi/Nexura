@@ -39,7 +39,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const code = searchParams.get('code');
   const state = searchParams.get('state');
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://vercel.com/mouhamed1slem-bouazizis-projects/nexura/CV7DeaofJ5zUsa267s28X8Veqg8M/';
 
   console.log('Callback initiated:', { code: !!code, state: !!state });
 
