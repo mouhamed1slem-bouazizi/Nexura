@@ -39,9 +39,18 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const code = searchParams.get('code');
   const state = searchParams.get('state');
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://nexura-eight.vercel.app/';
+  
+  // Get the base URL with a fallback and ensure no trailing slash
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://nexura-eight.vercel.app';
+  const normalizedBaseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
 
-  console.log('Callback initiated:', { code: !!code, state: !!state });
+  console.log('Callback initiated:', { 
+    code: !!code, 
+    state: !!state,
+    baseUrl: normalizedBaseUrl,
+    hasTwitterClientId: !!process.env.TWITTER_CLIENT_ID,
+    hasTwitterClientSecret: !!process.env.TWITTER_CLIENT_SECRET
+  });
 
   if (!code || !state) {
     console.error('Missing parameters:', { code: !!code, state: !!state });
@@ -92,7 +101,7 @@ export async function GET(request: Request) {
         code,
         grant_type: 'authorization_code',
         client_id: process.env.TWITTER_CLIENT_ID!,
-        redirect_uri: `${baseUrl}/api/auth/twitter/callback`,
+        redirect_uri: `${normalizedBaseUrl}/api/auth/twitter/callback`,
         code_verifier: codeVerifier || ''
       })
     });
